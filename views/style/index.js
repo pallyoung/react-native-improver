@@ -1,16 +1,37 @@
 'use strict'
 
-import text from './text';
-import image from './image';
-import view from './view';
-var baseStyle = {
-    text:{},
+import image from './image'
+import text from './'
+import textInput from './'
+import view from './'
+
+
+
+var _styleSheet = {
+    text,
+    image,
+    view,
+    textInput
 }
-function getRNComponentBaseStyleSheet(){
-    return baseStyles;
+
+function _assign(origin, source) {
+    for (let p in source) {
+        origin[p] = source[p];
+    }
 }
-function setRNComponentBaseStyleSheet(styles){
-    baseStyles = Object.assign(baseStyles,styles);
+
+function getRNComponentBaseStyleSheet(componentName) {
+    if (!_styleSheet[componentName]) {
+        _styleSheet[componentName] = {};
+    }
+    return _styleSheet[componentName];
+}
+function setRNComponentBaseStyleSheet(styleSheet) {
+    for (let style in styleSheet) {
+        _styleSheet[style] = _styleSheet[style] || {};
+        _assign(_styleSheet[style], styleSheet[style]);
+    }
+
 }
 export {
     getRNComponentBaseStyleSheet,

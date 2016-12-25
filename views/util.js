@@ -1,13 +1,13 @@
 'use strict'
 import React from  'react';
-function redefineComponentRender(component,render){
+function redefineComponentRender(component,renderDefiner){
 
-    component.prototype.render = (function(){
+    component.prototype.render = (function(component,originalRender){
         let originalRender = component.prototype.render;
-        return render(function(context){
+        return renderDefiner(function(context){
             return originalRender.call(context);
-        })
-    })(component,render)
+        });
+    })(component,originalRender)
 }
 function setComponentBaseProps(component,props){
     redefineRender(component,function(originalRender){
@@ -33,8 +33,8 @@ function setComponentBaseStyle(component,style){
     })
 }
 function redefineComponent(component,config){
-    if(config.render){
-        redefineRender(component,config.render);
+    if(config.renderDefiner){
+        redefineRender(component,config.renderDefiner);
     }
     if(config.props){
         setBaseProps(component,config.props);
