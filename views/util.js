@@ -1,6 +1,6 @@
 'use strict'
 import React from  'react';
-function redefineRender(component,render){
+function redefineComponentRender(component,render){
 
     component.prototype.render = (function(){
         let originalRender = component.prototype.render;
@@ -9,7 +9,7 @@ function redefineRender(component,render){
         })
     })(component,render)
 }
-function setBaseProps(component,props){
+function setComponentBaseProps(component,props){
     redefineRender(component,function(originalRender){
         let originalComponent = originalRender(this);
         let props = Object.assign(props,originalComponent.props);
@@ -21,7 +21,7 @@ function setBaseProps(component,props){
         }
     });
 }
-function setBaseStyle(component,style){
+function setComponentBaseStyle(component,style){
     redefineRender(component,function(originalRender){
         let originalComponent = originalRender(this);
         return function(){
@@ -52,7 +52,7 @@ function redefineComponent(component,config){
 
 export {
     redefineComponent,
-    redefineRender,
-    setBaseProps,
-    setBaseStyle
+    redefineComponentRender,
+    setComponentBaseStyle,
+    setComponentBaseStyle
 }

@@ -4,15 +4,15 @@ import text from './text';
 import image from './image';
 import view from './view';
 var baseStyle = {
-
+    text:{},
 }
-function getBaseStyle(){
-    return baseStyle;
+function getRNComponentBaseStyleSheet(){
+    return baseStyles;
 }
-function setBaseStyle(baseStyle){
-
+function setRNComponentBaseStyleSheet(styles){
+    baseStyles = Object.assign(baseStyles,styles);
 }
 export {
-    getBaseStyle,
-    setBaseStyle
+    getRNComponentBaseStyleSheet,
+    setRNComponentBaseStyleSheet
 }
