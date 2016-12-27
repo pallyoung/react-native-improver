@@ -1,0 +1,30 @@
+{
+  "name": "react-native-improver",
+  "version": "0.0.1",
+  "description": "tool for react-native style",
+  "main": "index.js",
+  "scripts": {
+    "test": "null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pallyoung/react-native-improver.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "awesome",
+    "improver",
+    "style"
+  ],
+  "author": "Spencer",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/pallyoung/react-native-improver/issues"
+  },
+  "homepage": "https://github.com/pallyoung/react-native-improver#readme"
+}
