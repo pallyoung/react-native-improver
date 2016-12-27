@@ -1,2 +1,9 @@
 'use strict'
-import views from './views';
+import {
+    setRNComponentBaseStyleSheet,
+    redefineComponent,
+    redefineComponentRender,
+    setComponentBaseProps,
+    setComponentBaseStyle
+} from './views';
+

@@ -1,17 +1,7 @@
 'use strict'
-
-import image from './image'
-import text from './'
-import textInput from './'
-import view from './'
-
-
-
+import {Component} from 'react';
 var _styleSheet = {
-    text,
-    image,
-    view,
-    textInput
+
 }
 
 function _assign(origin, source) {
@@ -33,6 +23,7 @@ function setRNComponentBaseStyleSheet(styleSheet) {
     }
 
 }
+
 export {
     getRNComponentBaseStyleSheet,
     setRNComponentBaseStyleSheet
