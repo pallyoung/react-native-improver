@@ -7,7 +7,7 @@ import {
     setComponentBaseProps,
     setComponentBaseStyle
 } from './util';
-let TabBarIOSItem = TabBarIOS.Item;
+//let TabBarIOSItem = TabBarIOS.Item;
 
 let keys = [
     'ActivityIndicator',
@@ -48,7 +48,7 @@ let keys = [
     'WebView'
 ];
 keys.forEach(function(item){
-    setComponentBaseStyle(ReactNative[item],getRNComponentBaseStyleSheet(item));
+    ReactNative[item]&&setComponentBaseStyle(ReactNative[item],getRNComponentBaseStyleSheet(item));
 });
 export {
     setRNComponentBaseStyleSheet,
