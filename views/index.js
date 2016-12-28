@@ -7,6 +7,11 @@ import {
     setComponentBaseProps,
     setComponentBaseStyle
 } from './util';
+import {
+    px2dp,
+    dp2px,
+    autoSize
+} from './autosize';
 //let TabBarIOSItem = TabBarIOS.Item;
 
 let keys = [
@@ -55,5 +60,8 @@ export {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseProps,
-    setComponentBaseStyle
+    setComponentBaseStyle,
+    px2dp,
+    dp2px,
+    autoSize
 }

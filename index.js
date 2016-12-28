@@ -4,7 +4,10 @@ import {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseProps,
-    setComponentBaseStyle
+    setComponentBaseStyle,
+    px2dp,
+    dp2px,
+    autoSize
 } from './views';
 
 const modules = {
@@ -12,7 +15,10 @@ const modules = {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseProps,
-    setComponentBaseStyle
+    setComponentBaseStyle,
+    px2dp,
+    dp2px,
+    autoSize
 }
 export {
     modules as default,
@@ -20,6 +26,9 @@ export {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseProps,
-    setComponentBaseStyle
+    setComponentBaseStyle,
+    px2dp,
+    dp2px,
+    autoSize
 }
 
