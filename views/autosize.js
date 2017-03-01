@@ -46,7 +46,7 @@ function dp2px(dp) {
     return PixelRatio.getPixelSizeForLayoutSize(dp);
 }
 function autoSize(dp) {
-    return PixelRatio.roundToNearestPixel(dp / RATIO);
+    return PixelRatio.roundToNearestPixel(dp * RATIO);
 }
 export {
     px2dp,
