@@ -2,7 +2,8 @@
 import React from 'react';
 function redefineComponentRender(component, renderDefiner) {
     component.prototype.render = (function (component, renderDefiner) {
-        let originalRender = component.prototype.render;
+        let originalRender = component.prototype._originalRender|| component.prototype.render;
+        component.prototype._originalRender = originalRender;
         return renderDefiner(function (context) {
             return originalRender.call(context);
         });
