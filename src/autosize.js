@@ -1,5 +1,5 @@
 'use strict'
-import { Dimensions, PixelRatio } from 'react-native';
+var { Dimensions, PixelRatio } = require('react-native');
 var WIDTH_DP = 375;
 var WIDTH_PX = 750;
 const PIXEL_RATIO = 2;
@@ -53,8 +53,9 @@ function setDeviceWidth(width) {
     WIDTH_PX = width * REAL_PIXEL_RATIO;
     RATIO = REAL_WIDTH_DP / WIDTH_DP;
 }
-export {
+module.exports =  {
     px2dp,
     dp2px,
-    autoSize
+    autoSize,
+    setDeviceWidth
 }
