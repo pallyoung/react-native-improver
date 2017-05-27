@@ -1,7 +1,7 @@
 'use strict'
 import { Dimensions, PixelRatio } from 'react-native';
-const WIDTH_DP = 375;
-const WIDTH_PX = 750;
+var WIDTH_DP = 375;
+var WIDTH_PX = 750;
 const PIXEL_RATIO = 2;
 const REAL_PIXEL_RATIO = PixelRatio.get();
 const REAL_WIDTH_DP = Dimensions.get('window').width;
@@ -47,6 +47,11 @@ function dp2px(dp) {
 }
 function autoSize(dp) {
     return PixelRatio.roundToNearestPixel(dp * RATIO);
+}
+function setDeviceWidth(width) {
+    WIDTH_DP = width;
+    WIDTH_PX = width * REAL_PIXEL_RATIO;
+    RATIO = REAL_WIDTH_DP / WIDTH_DP;
 }
 export {
     px2dp,

@@ -23,6 +23,7 @@ export default class Entry extends React.Component{
     render(){
         return <View style = {styles.wrapper}>
                 <Button text = {height+':'+width}/>
+                <Text>{Improver.autoSize(0.3)}</Text>
             </View>;
     }
 }

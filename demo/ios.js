@@ -11,11 +11,10 @@ import {
   Text,
   View
 } from 'react-native';
-import Entry from './demo/index';
+import Entry from './index';
 export default class demo extends Component {
   render() {
-    return  <Entry />;;
+    return  <Entry />;
   }
 }
-
 AppRegistry.registerComponent('demo', () => demo);
