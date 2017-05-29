@@ -24,6 +24,8 @@ import Improver from './../index';
 
 import AutoSizeDemo from './AutoSize';
 import ThemeDemo from './Theme';
+
+import RedefineComponentDemo from './RedefineComponent';
 var ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
 
 const routeMap = [
@@ -34,6 +36,10 @@ const routeMap = [
     {
         title:'Theme DEMO',
         component:ThemeDemo
+    },
+     {
+        title:'RedefineComponent DEMO',
+        component:RedefineComponentDemo
     }
 ]
 export default class Entry extends React.Component {

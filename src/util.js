@@ -1,36 +1,29 @@
 'use strict'
 import React from 'react';
 function redefineComponentRender(component, renderDefiner) {
-    component.prototype.render = (function (component, renderDefiner) {
-        let originalRender = component.prototype._originalRender|| component.prototype.render;
-        component.prototype._originalRender = originalRender;
-        return renderDefiner(function (context) {
-            return originalRender.call(context);
-        });
-    })(component, renderDefiner)
+    let originalRender = component.prototype._originalRender || component.prototype.render;
+    component.prototype._originalRender = originalRender;
+    component.prototype.render = function () {
+        return renderDefiner(this._originalRender());
+    };
 }
-function setComponentBaseProps(component, props) {
-    redefineComponentRender(component, function (originalRender) {
-        return function () {
-            let originalComponent = originalRender(this);
-            let props = Object.assign(props, originalComponent.props);
-            return React.cloneElement(
-                originalRender(this),
-                props
-            )
-        }
-    });
+function setComponentDefaultProps(component, props) {
+    Object.assign(component.defaultProps,props);
+    // redefineComponentRender(component, function (originalComponent) {
+    //     props = Object.assign(props, originalComponent.props);
+    //     return React.cloneElement(
+    //         originalRender(this),
+    //         props
+    //     )
+    // });
 }
 function setComponentBaseStyle(component, style) {
-    redefineComponentRender(component, function (originalRender) {
-        return function () {
-            let originalComponent = originalRender(this);
-            let props = Object.assign({},originalComponent.props,{ style: [style, originalComponent.props.style] });
-            return React.cloneElement(
-                originalComponent,
-                props
-            )
-        }
+    redefineComponentRender(component, function (originalComponent) {
+        let props = Object.assign({}, originalComponent.props || {}, { style: [style, originalComponent.props.style || {}] });
+        return React.cloneElement(
+            originalComponent,
+            props
+        )
     })
 }
 function redefineComponent(component, config) {
@@ -55,5 +48,5 @@ export {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseStyle,
-    setComponentBaseProps
+    setComponentDefaultProps
 }
