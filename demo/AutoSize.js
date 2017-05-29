@@ -12,13 +12,15 @@ import {
     Easing
 } from 'react-native';
 
+import Improver from './../index';
+
 export default class AutoSize extends Component{
     constructor(...props){
         super(...props);
     }
     render(){
         return <View>
-            <Text>autosize demo</Text>
+            <Text></Text>
         </View>
     }
 }

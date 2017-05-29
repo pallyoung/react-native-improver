@@ -23,12 +23,17 @@ import Content from './component/Content';
 import Improver from './../index';
 
 import AutoSizeDemo from './AutoSize';
+import ThemeDemo from './Theme';
 var ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
 
 const routeMap = [
     {
         title:'AUTOSIZE DEMO',
         component:AutoSizeDemo
+    },
+    {
+        title:'Theme DEMO',
+        component:ThemeDemo
     }
 ]
 export default class Entry extends React.Component {
