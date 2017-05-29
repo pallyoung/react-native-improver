@@ -10,12 +10,25 @@ import {
 export default class Button extends Component {
     constructor(...props) {
         super(...props);
+        this.state = {
+            title:this.props.title
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.title!==this.props.title){
+            this.state.title = this.props.title;
+        }
+    }
+    
+    setTitle(title){
+        this.setState({title})
     }
     render() {
         return <View style={styles.wrapper}>          
-            <Text style = {styles.titleText}>{this.props.title}</Text>
+            <Text style = {styles.titleText}>{this.state.title}</Text>
             <TouchableHighlight
                 onPress = {this.props.onBack}
+                underlayColor = 'transparent'
                 style = {styles.backIcon}>
                 <Text style = {styles.backIconText}>Back</Text>
             </TouchableHighlight>

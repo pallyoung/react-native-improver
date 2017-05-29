@@ -19,47 +19,66 @@ var {
 
 import Button from './component/Button';
 import Header from './component/Header';
+import Content from './component/Content';
 import Improver from './../index';
 
+import AutoSizeDemo from './AutoSize';
 var ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
+
+const routeMap = [
+    {
+        title:'AUTOSIZE DEMO',
+        component:AutoSizeDemo
+    }
+]
 export default class Entry extends React.Component {
     constructor(...props) {
         super(...props);
         this.state = {
+            title:'',
             height: 0,
             width: 0,
-            views:[1,2,4],
+            currentView:'',
+            views:routeMap,
             translateX:new Animated.Value(0)
         }
     }
-    push() {
+    push(route) {
         Animated.timing(
             this.state.translateX,
             {
-                duration:500,
+                duration:300,
                 easing:Easing.ease,
                 toValue:-this.state.width
-            }).start()
+            }).start(()=>{
+                this.refs.header.setTitle(route.title);
+                let View = route.component;
+                this.refs.content.setChildren(<View />);
+            })
     }
     pop() {
         Animated.timing(
             this.state.translateX,
             {
-                duration:500,
+                duration:300,
                 easing:Easing.ease,
                 toValue:0
-            }).start()
+            }).start(()=>{
+                this.refs.content.setChildren(null);
+                this.refs.header.setTitle('DEMO');
+            })
     }
     _renderItem(item,id,sid){
         return  <Button 
-                    onPress = {()=>this.push()}
-                    text='autosize' />
+                    onPress = {()=>this.push(item)}
+                    text={item.title} />
     }
     render() {
         return <View style={styles.wrapper}>
             <Header 
+                ref = 'header'
                 onBack = {()=>this.pop()}
-                title='DEMO'></Header>
+                title='DEMO' />
             <View
                 style={styles.content}
                 onLayout={(e) => {
@@ -73,15 +92,20 @@ export default class Entry extends React.Component {
                     style={{
                         height: this.state.height,
                         width: this.state.width*2,
+                        flexDirection:'row',
                         transform:[{translateX:this.state.translateX}]
                     }}>
                     <ListView 
                         style = {styles.child}
+                        contentContainerStyle = {{
+                            flexDirection: 'column',
+                        }}
                         renderRow = {(...args)=>this._renderItem(...args)}
                         dataSource = {ds.cloneWithRows(this.state.views)}
                         />
-                    <View
-                        style = {styles.child}></View>
+                    <Content
+                        ref = 'content'
+                        style = {styles.child} />
                 </Animated.View>
             </View>
         </View>;

@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  PixelRatio
 } from 'react-native';
 
 export default class Button extends Component{
@@ -16,8 +17,10 @@ export default class Button extends Component{
     render(){
         return <TouchableHighlight
                 onPress = {this.props.onPress} 
+                activeOpacity ={1}
+                underlayColor = '#e76c80'
                 style = {styles.wrapper}>
-                <Text>{this.props.text}</Text>
+                <Text style ={{color:'#222',}}>{this.props.text}</Text>
         </TouchableHighlight>
     }
 }
@@ -26,9 +29,10 @@ const styles = StyleSheet.create({
     wrapper:{
         flexDirection:'row',
         height:44,
-        width:220,
-        justifyContent:'center',
+        justifyContent:'flex-start',
+        paddingLeft:44,
         alignItems:'center',
-        backgroundColor:'#222'
+        borderBottomWidth:1/PixelRatio.get(),
+        borderColor:'#e76c80'
     },
 }) 
