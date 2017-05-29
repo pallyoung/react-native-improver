@@ -1,5 +1,5 @@
 'use strict'
-import React from 'react';
+var React = require('react');
 function redefineComponentRender(component, renderDefiner) {
     let originalRender = component.prototype._originalRender || component.prototype.render;
     component.prototype._originalRender = originalRender;
@@ -7,15 +7,9 @@ function redefineComponentRender(component, renderDefiner) {
         return renderDefiner(this._originalRender());
     };
 }
-function setComponentDefaultProps(component, props) {
-    Object.assign(component.defaultProps,props);
-    // redefineComponentRender(component, function (originalComponent) {
-    //     props = Object.assign(props, originalComponent.props);
-    //     return React.cloneElement(
-    //         originalRender(this),
-    //         props
-    //     )
-    // });
+function resetComponentRender(component){
+    component.prototype.render = component.prototype._originalRender||component.prototype.render;
+    delete component.prototype._originalRender;
 }
 function setComponentBaseStyle(component, style) {
     redefineComponentRender(component, function (originalComponent) {
@@ -26,27 +20,49 @@ function setComponentBaseStyle(component, style) {
         )
     })
 }
+function setComponentBaseStyle(component, style) {
+    redefineComponentRender(component, function (originalComponent) {
+        let props = Object.assign({}, originalComponent.props || {}, { style: [style, originalComponent.props.style || {}] });
+        return React.cloneElement(
+            originalComponent,
+            props
+        )
+    })
+}
+function setComponentDefaultProps(component,defaultProps){
+    if(!component._defaultProps){
+        component._defaultProps = component.defaultProps;
+    }
+    component.defaultProps = Object.assign({},component._defaultProps,defaultProps);
+}
+function resetComponentDefaultProps(component){
+    if(component._defaultProps){
+        component.defaultProps = component._defaultProps;
+        delete component._defaultProps;
+    }
+}
 function redefineComponent(component, config) {
     if (config.renderDefiner) {
         redefineComponentRender(component, config.renderDefiner);
     }
     if (config.props) {
-        setComponentBaseProps(component, config.props);
+        setComponentDefaultProps(component, config.props);
     }
     if (config.style) {
         setComponentBaseStyle(component, config.style);
     }
-    if (config.defaultProps) {
-        component.defaultProps = Object.assign(component.defaultProps, config.defaultProps);
-    }
-    if (config.propTypes) {
-        component.propTypes = Object.assign(component.propTypes, config.propTypes);
-    }
 }
 
-export {
+function resetComponent(component){
+    resetComponentRender(component);
+    resetComponentDefaultProps(component);
+}
+module.exports = {
     redefineComponent,
     redefineComponentRender,
     setComponentBaseStyle,
-    setComponentDefaultProps
+    setComponentDefaultProps,
+    resetComponentRender,
+    resetComponent,
+    resetComponentDefaultProps
 }

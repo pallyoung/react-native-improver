@@ -21,8 +21,13 @@ export default class RedefineComponent extends Component{
         this._setDefaultProps();
         this._setBaseStyle();
         this._redefineRender();
-        this._redefineComponent();
     }
+    componentWillUnmount() {
+        this._redefineComponent();
+        this._resetComponent();
+    }
+    
+    
     _setBaseStyle(){
         Improver.setComponentBaseStyle(Text,{color:'red'})
     }
@@ -39,16 +44,11 @@ export default class RedefineComponent extends Component{
         })
     }
     _redefineComponent(){
-        Improver.redefineComponent(
-            Image,
-            {
-                style:{
-                    height:100,
-                    width:100,
-                    backgroundColor:'#eeffee'
-                }
-            }
-        )
+
+    }
+    _resetComponent(){
+        Improver.resetComponent(Text);
+        Improver.resetComponent(View);
     }
     render(){
         return <View>
