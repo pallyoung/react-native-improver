@@ -1,6 +1,6 @@
 {
   "name": "react-native-improver",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "tool for react-native style",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "native",
     "awesome",
     "improver",
-    "style"
+    "style",
+    "theme"
   ],
   "author": "Spencer",
   "license": "ISC",
